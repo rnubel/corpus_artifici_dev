@@ -36,4 +36,19 @@
    DebugRendering = "0";
       cameraPosition = "0 0";
       cameraSize = "100 75";
+
+   new t2dTileLayer() {
+      LayerFile = "~/data/tilemaps/test_fg.lyr";
+      canSaveDynamicFields = "1";
+      size = "80.000 60.000";
+      CollisionActiveReceive = "1";
+      CollisionMaxIterations = "1";
+         mountID = "2";
+   };
+   new t2dAnimatedSprite() {
+      animationName = "basicWalk";
+      config = "BaseActorConfig";
+      Position = "-15.521 -8.073";
+      size = "8.000 8.000";
+   };
 };

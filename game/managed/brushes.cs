@@ -3,4 +3,3 @@ $brushSet = new SimSet() {
    internalName = "Brushes";
       setType = "Brushes";
 };
-
