@@ -115,3 +115,22 @@ function StateMachineBehavior::executeDelayedEvent(%this, %event, %key)
 }
 
 
+// **** INTERFACE LAYER (could be pulled out later) ****
+
+function StateMachineBehavior::moveLeft(%this) {
+
+}
+
+function StateMachineBehavior::moveRight(%this) {
+
+}
+
+function StateMachineBehavior::block(%this) {
+	%this.reactToEvent("startBlocking");
+	%this.delayEvent("doneStartingToBlock", 500);
+}
+
+function StateMachineBehavior::stopBlocking(%this) {
+	%this.reactToEvent("stopBlocking");
+	%this.delayEvent("doneStoppingBlocking", 300);
+}
