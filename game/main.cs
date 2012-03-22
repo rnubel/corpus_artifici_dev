@@ -11,7 +11,7 @@ function initializeProject()
 {
    // Load up the in game gui.
    exec("~/gui/mainScreen.gui");
-
+   exec("~/gui/equipment.gui");
    // Exec game scripts.
    exec("./gameScripts/game.cs");
 

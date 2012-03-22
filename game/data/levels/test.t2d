@@ -40,7 +40,8 @@
    new t2dTileLayer() {
       LayerFile = "~/data/tilemaps/test_fg.lyr";
       canSaveDynamicFields = "1";
-      size = "80.000 60.000";
+      Position = "19.182 27.471";
+      size = "478.364 315.057";
       CollisionActiveReceive = "1";
       CollisionMaxIterations = "1";
          mountID = "2";
@@ -50,5 +51,15 @@
       config = "BaseActorConfig";
       Position = "-15.521 -8.073";
       size = "8.000 8.000";
+   };
+   new t2dStaticSprite() {
+      imageMap = "bg_blank_skyImageMap";
+      frame = "0";
+      sourceRect = "0 0 0 0";
+      canSaveDynamicFields = "1";
+      Position = "1.341 -1.410";
+      size = "122.681 82.821";
+      Layer = "31";
+         mountID = "4";
    };
 };

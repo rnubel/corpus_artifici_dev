@@ -18,9 +18,12 @@ function startGame(%level)
    
    $enableDirectInput = true;
    activateDirectInput();
-   enableJoystick();
+   enableJoystick(); 
    
    sceneWindow2D.loadLevel(%level);
+   
+
+   Canvas.setContent(equipmentGUI);  
 }
 
 //---------------------------------------------------------------------------------------------
