@@ -23,6 +23,21 @@ if(!isObject(ExampleWindowProfile)) new GuiControlProfile(ExampleWindowProfile)
    justify = "center";
 };
 
+if(!isObject(CAGUIProfile)) new GuiControlProfile(CAGUIProfile)
+{
+   opaque = false;
+   border = 0;
+   fillColor = "211 211 211";
+   fillColorHL = "190 255 255";
+   fillColorNA = "255 255 255";
+   fontColor = "0 0 0";
+   fontColorHL = "200 200 200";
+   text = "untitled";
+   textOffset = "5 5";
+   hasBitmapArray = true;
+   justify = "center";
+};
+
 if(!isObject(ExampleScrollProfile)) new GuiControlProfile (ExampleScrollProfile)
 {
    opaque = true;
@@ -50,4 +65,11 @@ if(!isObject(ExampleTextProfile)) new GuiControlProfile(ExampleTextProfile)
    fontType = "Arial";
    fontSize = 16;
    fontColor = "0 0 0";
+};
+
+if(!isObject(ExampleTextProfile)) new GuiControlProfile(CATextProfile)
+{
+   fontType = "Arial";
+   fontSize = 16;
+   fontColor = "255 255 255";
 };

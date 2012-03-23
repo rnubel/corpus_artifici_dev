@@ -1,0 +1,141 @@
+//--- OBJECT WRITE BEGIN ---
+%guiContent = new GuiControl(masterGUI) {
+   canSaveDynamicFields = "0";
+   isContainer = "1";
+   Profile = "CAGUIProfile";
+   HorizSizing = "right";
+   VertSizing = "bottom";
+   Position = "0 0";
+   Extent = "640 480";
+   MinExtent = "8 2";
+   canSave = "1";
+   Visible = "1";
+   hovertime = "1000";
+
+   new GuiBitmapCtrl(healthbar_bottom) {
+      canSaveDynamicFields = "0";
+      isContainer = "0";
+      Profile = "CAGUIProfile";
+      HorizSizing = "right";
+      VertSizing = "bottom";
+      Position = "15 15";
+      Extent = "200 15";
+      MinExtent = "8 2";
+      canSave = "1";
+      Visible = "1";
+      hovertime = "1000";
+      bitmap = "~/data/images/ui/mk1_ui/healthbar_bottom.png";
+      wrap = "0";
+   };
+   new GuiBitmapCtrl(staminabar_bottom) {
+      canSaveDynamicFields = "0";
+      isContainer = "0";
+      Profile = "CAGUIProfile";
+      HorizSizing = "right";
+      VertSizing = "bottom";
+      Position = "15 36";
+      Extent = "199 15";
+      MinExtent = "8 2";
+      canSave = "1";
+      Visible = "1";
+      hovertime = "1000";
+      bitmap = "~/data/images/ui/mk1_ui/healthbar_bottom.png";
+      wrap = "0";
+   };
+   new GuiMLTextCtrl(player_name_guiml) {
+      canSaveDynamicFields = "0";
+      isContainer = "0";
+      Profile = "GuiMLTextProfile";
+      HorizSizing = "right";
+      VertSizing = "bottom";
+      Position = "35 1";
+      Extent = "64 14";
+      MinExtent = "8 2";
+      canSave = "1";
+      Visible = "1";
+      hovertime = "1000";
+      lineSpacing = "2";
+      allowColorChars = "0";
+      maxChars = "-1";
+      text = "<color:FFFFFF><shadow:1:1/>Player Name";
+   };
+   new GuiMLTextCtrl(player_level_guiml) {
+      canSaveDynamicFields = "0";
+      isContainer = "0";
+      Profile = "GuiMLTextProfile";
+      HorizSizing = "right";
+      VertSizing = "bottom";
+      Position = "162 1";
+      Extent = "64 14";
+      MinExtent = "8 2";
+      canSave = "1";
+      Visible = "1";
+      hovertime = "1000";
+      lineSpacing = "2";
+      allowColorChars = "0";
+      maxChars = "-1";
+      text = "<color:FFFFFF><shadow:1:1/>Level 7";
+   };
+   new GuiControl(healthbar_top_mask) {
+      canSaveDynamicFields = "0";
+      isContainer = "1";
+      Profile = "CAGUIProfile";
+      HorizSizing = "right";
+      VertSizing = "bottom";
+      Position = "30 2";
+      Extent = "209 59";
+      MinExtent = "8 2";
+      canSave = "1";
+      Visible = "1";
+      tooltipprofile = "GuiDefaultProfile";
+      hovertime = "1000";
+
+      new GuiBitmapCtrl(healthbar_top) {
+         canSaveDynamicFields = "0";
+         isContainer = "0";
+         Profile = "CAGUIProfile";
+         HorizSizing = "right";
+         VertSizing = "bottom";
+         Position = "-15 13";
+         Extent = "200 15";
+         MinExtent = "8 2";
+         canSave = "1";
+         Visible = "1";
+         tooltipprofile = "GuiDefaultProfile";
+         hovertime = "1000";
+         bitmap = "~/data/images/ui/mk1_ui/healthbar_top.png";
+         wrap = "0";
+      };
+   };
+   new GuiControl(staminabar_top_mask) {
+      canSaveDynamicFields = "0";
+      isContainer = "1";
+      Profile = "CAGUIProfile";
+      HorizSizing = "right";
+      VertSizing = "bottom";
+      Position = "31 28";
+      Extent = "175 31";
+      MinExtent = "8 2";
+      canSave = "1";
+      Visible = "1";
+      tooltipprofile = "GuiDefaultProfile";
+      hovertime = "1000";
+
+      new GuiBitmapCtrl(staminabar_top) {
+         canSaveDynamicFields = "0";
+         isContainer = "0";
+         Profile = "CAGUIProfile";
+         HorizSizing = "right";
+         VertSizing = "bottom";
+         Position = "-16 8";
+         Extent = "200 15";
+         MinExtent = "8 2";
+         canSave = "1";
+         Visible = "1";
+         hovertime = "1000";
+         bitmap = "~/data/images/ui/mk1_ui/staminabar_top.png";
+         wrap = "0";
+      };
+   };
+};
+//--- OBJECT WRITE END ---

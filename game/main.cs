@@ -12,8 +12,13 @@ function initializeProject()
    // Load up the in game gui.
    exec("~/gui/mainScreen.gui");
    exec("~/gui/equipment.gui");
+   exec("~/gui/defaultGUI.gui");
+   exec("~/gui/masterGUI.gui");
+   
+   
    // Exec game scripts.
    exec("./gameScripts/game.cs");
+   exec("~/gameScripts/masterGUIControl.cs");
 
    // This is where the game starts. Right now, we are just starting the first level. You will
    // want to expand this to load up a splash screen followed by a main menu depending on the

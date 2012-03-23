@@ -10,7 +10,8 @@
 //---------------------------------------------------------------------------------------------
 function startGame(%level)
 {
-   Canvas.setContent(mainScreenGui);
+   Canvas.setContent(defaultGUI);
+   Canvas.pushDialog(masterGUI);
    Canvas.setCursor(DefaultCursor);
    
    new ActionMap(moveMap);   
@@ -21,9 +22,10 @@ function startGame(%level)
    enableJoystick(); 
    
    sceneWindow2D.loadLevel(%level);
-   
 
-   Canvas.setContent(equipmentGUI);  
+   healthbar_top_mask.setExtent(50,50);
+   staminabar_top_mask.setExtent(75,75);
+   
 }
 
 //---------------------------------------------------------------------------------------------
@@ -36,3 +38,4 @@ function endGame()
    moveMap.pop();
    moveMap.delete();
 }
+
