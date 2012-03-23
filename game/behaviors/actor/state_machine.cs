@@ -25,11 +25,30 @@ function StateMachineBehavior::onBehaviorAdd(%this)
 	%this.addTransition("walking", 		"stopMoving",		"ready");
 	%this.addTransition("ready",		"startTurning",		"turning");
 	%this.addTransition("turning",		"doneTurning",		"ready");
+	
+	%this.addEntryCallback("walking", 	"%this.startedWalking();");
+	%this.addEntryCallback("ready", 	"%this.stoppedMoving();");
+	%this.addEntryCallback("turning", 	"%this.startedTurning();");
+	
+	%this.addEventCallback("doneTurning",	"%this.doneTurning();");
 }
 
 function StateMachineBehavior::onUpdate(%this)
 {
 	
+}
+
+function StateMachineBehavior::addEntryCallback(%this, %stateName, %eval)
+{
+	%this.entryCallbacks[%stateName @ "_notblocking"] 		= %eval;
+	%this.entryCallbacks[%stateName @ "_startingblocking"] 	= %eval;
+	%this.entryCallbacks[%stateName @ "_blocking"] 			= %eval;
+	%this.entryCallbacks[%stateName @ "_stoppingblocking"]	= %eval;	
+}
+
+function StateMachineBehavior::addEventCallback(%this, %eventName, %eval)
+{
+	%this.eventCallbacks[%eventName] = %eval;	
 }
 
 function StateMachineBehavior::addState(%this, %stateName, %attributes)
@@ -63,6 +82,10 @@ function StateMachineBehavior::reactToEvent(%this, %event)
 {
 	%toState = %this.realStateTransitions[%this.state, %event];
 	echo("reacting to event " @ %event @ " in state " @ %this.state @ ": " @ %toState);
+	
+	// Perform event callback.
+	eval(%this.eventCallbacks[%event]);
+	
 	if (%toState $= "") {
 		// Event ignored.
 		return false;
@@ -71,6 +94,9 @@ function StateMachineBehavior::reactToEvent(%this, %event)
 		
 		%this.delayedEventKey += 1; // Invalidate any delayed events.
 		%this.state = %toState;
+		
+		// Call any callbacks.
+		eval(%this.entryCallbacks[%this.state]);
 		
 		return true;
 	}
@@ -126,3 +152,27 @@ function StateMachineBehavior::stopBlocking(%this) {
 	%this.reactToEvent("stopBlocking");
 	%this.delayEvent("doneStoppingBlocking", 300);
 }
+
+// **** CALLBACKS ****
+function StateMachineBehavior::startedWalking(%this) {
+	if (%this.direction $= "left") {
+		%this.owner.setLinearVelocityX(-10);
+	} else {
+		%this.owner.setLinearVelocityX(10);
+	}
+	%this.owner.playAnimation(basicWalk);
+}
+
+function StateMachineBehavior::stoppedMoving(%this) {
+	%this.owner.setLinearVelocityX(0);
+	%this.owner.playAnimation(basicIdle);
+}
+
+function StateMachineBehavior::startedTurning(%this) {
+	
+}
+
+function StateMachineBehavior::doneTurning(%this) {
+	%this.owner.setFlipX(!%this.owner.getFlipX());
+}
+

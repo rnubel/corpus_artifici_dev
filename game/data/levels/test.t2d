@@ -53,6 +53,7 @@
       size = "8.000 8.000";
       _behavior0 = "StateMachineBehavior";
       _behavior1 = "PlayerInputBehavior";
+      _behavior2 = "CameraFollowsBehavior";
    };
    new t2dStaticSprite() {
       imageMap = "bg_blank_skyImageMap";
