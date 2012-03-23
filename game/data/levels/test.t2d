@@ -52,6 +52,7 @@
       Position = "-15.521 -8.073";
       size = "8.000 8.000";
       _behavior0 = "StateMachineBehavior";
+      _behavior1 = "PlayerInputBehavior";
    };
    new t2dStaticSprite() {
       imageMap = "bg_blank_skyImageMap";
