@@ -60,8 +60,8 @@
       frame = "0";
       sourceRect = "0 0 0 0";
       canSaveDynamicFields = "1";
-      Position = "1.341 -1.410";
-      size = "122.681 82.821";
+      Position = "45.000 14.263";
+      size = "480.000 298.526";
       Layer = "31";
          mountID = "4";
    };
