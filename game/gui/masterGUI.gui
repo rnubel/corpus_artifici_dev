@@ -12,7 +12,7 @@
    Visible = "1";
    hovertime = "1000";
 
-   new t2dSceneWindow(sceneWindow2D) {
+   new t2dSceneWindow(sceneWindow2d) {
       canSaveDynamicFields = "0";
       isContainer = "0";
       Profile = "GuiContentProfile";
@@ -28,7 +28,6 @@
       useWindowMouseEvents = "1";
       useObjectMouseEvents = "1";
    };
-   
    new GuiBitmapCtrl(healthbar_bottom) {
       canSaveDynamicFields = "0";
       isContainer = "0";
@@ -160,21 +159,37 @@
       Profile = "CAGUIProfile";
       HorizSizing = "right";
       VertSizing = "bottom";
-      Position = "380 1";
-      Extent = "287 92";
+      Position = "355 1";
+      Extent = "312 110";
       MinExtent = "8 2";
       canSave = "1";
       Visible = "1";
       hovertime = "1000";
 
-      new GuiBitmapCtrl() {
+      new GuiBitmapCtrl(pane1) {
          canSaveDynamicFields = "0";
          isContainer = "0";
          Profile = "CAGUIProfile";
          HorizSizing = "right";
          VertSizing = "bottom";
-         Position = "8 7";
-         Extent = "72 72";
+         Position = "0 7";
+         Extent = "90 90";
+         MinExtent = "8 2";
+         canSave = "1";
+         Visible = "1";
+         tooltipprofile = "GuiDefaultProfile";
+         hovertime = "1000";
+         bitmap = "~/data/images/ui/mk1_ui/item_pane.png";
+         wrap = "0";
+      };
+      new GuiBitmapCtrl(pane2) {
+         canSaveDynamicFields = "0";
+         isContainer = "0";
+         Profile = "CAGUIProfile";
+         HorizSizing = "right";
+         VertSizing = "bottom";
+         Position = "94 7";
+         Extent = "90 90";
          MinExtent = "8 2";
          canSave = "1";
          Visible = "1";
@@ -182,14 +197,14 @@
          bitmap = "~/data/images/ui/mk1_ui/item_pane.png";
          wrap = "0";
       };
-      new GuiBitmapCtrl() {
+      new GuiBitmapCtrl(pane3) {
          canSaveDynamicFields = "0";
          isContainer = "0";
          Profile = "CAGUIProfile";
          HorizSizing = "right";
          VertSizing = "bottom";
-         Position = "179 7";
-         Extent = "72 72";
+         Position = "191 7";
+         Extent = "90 90";
          MinExtent = "8 2";
          canSave = "1";
          Visible = "1";
@@ -197,19 +212,34 @@
          bitmap = "~/data/images/ui/mk1_ui/item_pane.png";
          wrap = "0";
       };
-      new GuiBitmapCtrl() {
+      new GuiBitmapCtrl(item_icon1) {
          canSaveDynamicFields = "0";
          isContainer = "0";
          Profile = "CAGUIProfile";
          HorizSizing = "right";
          VertSizing = "bottom";
-         Position = "98 7";
-         Extent = "72 72";
+         Position = "4 10";
+         Extent = "80 80";
          MinExtent = "8 2";
          canSave = "1";
          Visible = "1";
          hovertime = "1000";
-         bitmap = "~/data/images/ui/mk1_ui/item_pane.png";
+         bitmap = "~/data/images/ui/mk1_ui/item_icons/test_sword.png";
+         wrap = "0";
+      };
+      new GuiBitmapCtrl(item_icon1) {
+         canSaveDynamicFields = "0";
+         isContainer = "0";
+         Profile = "CAGUIProfile";
+         HorizSizing = "right";
+         VertSizing = "bottom";
+         Position = "100 13";
+         Extent = "80 80";
+         MinExtent = "8 2";
+         canSave = "1";
+         Visible = "1";
+         hovertime = "1000";
+         bitmap = "~/data/images/ui/mk1_ui/item_icons/test_shield.png";
          wrap = "0";
       };
       new GuiMLTextCtrl(item1_text) {
@@ -218,7 +248,7 @@
          Profile = "GuiMLTextProfile";
          HorizSizing = "right";
          VertSizing = "bottom";
-         Position = "7 79";
+         Position = "11 80";
          Extent = "64 14";
          MinExtent = "8 2";
          canSave = "1";
@@ -227,6 +257,7 @@
          lineSpacing = "2";
          allowColorChars = "0";
          maxChars = "-1";
+         text = "<color:FFFFFF><shadow:1:1/>Sword";
       };
       new GuiMLTextCtrl(item2_text) {
          canSaveDynamicFields = "0";
@@ -243,6 +274,7 @@
          lineSpacing = "2";
          allowColorChars = "0";
          maxChars = "-1";
+         text = "<color:FFFFFF><shadow:1:1/>Shield";
       };
       new GuiMLTextCtrl(item3_text) {
          canSaveDynamicFields = "0";
