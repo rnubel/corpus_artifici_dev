@@ -186,6 +186,7 @@ function StateMachineBehavior::updateAnimation(%this) {
 		} else {
 			%this.owner.playAnimation(basicWalk);
 		}
+	}
 	else {
 		if (%this.isBlocking()) {
 			%this.owner.playAnimation(basicBlockIdle);
