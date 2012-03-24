@@ -11,7 +11,6 @@
    canSave = "1";
    Visible = "1";
    hovertime = "1000";
-   
 
    new t2dSceneWindow(sceneWindow2D) {
       canSaveDynamicFields = "0";
@@ -153,6 +152,113 @@
          hovertime = "1000";
          bitmap = "~/data/images/ui/mk1_ui/staminabar_top.png";
          wrap = "0";
+      };
+   };
+   new GuiControl(item_pane) {
+      canSaveDynamicFields = "0";
+      isContainer = "1";
+      Profile = "CAGUIProfile";
+      HorizSizing = "right";
+      VertSizing = "bottom";
+      Position = "380 1";
+      Extent = "287 92";
+      MinExtent = "8 2";
+      canSave = "1";
+      Visible = "1";
+      hovertime = "1000";
+
+      new GuiBitmapCtrl() {
+         canSaveDynamicFields = "0";
+         isContainer = "0";
+         Profile = "CAGUIProfile";
+         HorizSizing = "right";
+         VertSizing = "bottom";
+         Position = "8 7";
+         Extent = "72 72";
+         MinExtent = "8 2";
+         canSave = "1";
+         Visible = "1";
+         hovertime = "1000";
+         bitmap = "~/data/images/ui/mk1_ui/item_pane.png";
+         wrap = "0";
+      };
+      new GuiBitmapCtrl() {
+         canSaveDynamicFields = "0";
+         isContainer = "0";
+         Profile = "CAGUIProfile";
+         HorizSizing = "right";
+         VertSizing = "bottom";
+         Position = "179 7";
+         Extent = "72 72";
+         MinExtent = "8 2";
+         canSave = "1";
+         Visible = "1";
+         hovertime = "1000";
+         bitmap = "~/data/images/ui/mk1_ui/item_pane.png";
+         wrap = "0";
+      };
+      new GuiBitmapCtrl() {
+         canSaveDynamicFields = "0";
+         isContainer = "0";
+         Profile = "CAGUIProfile";
+         HorizSizing = "right";
+         VertSizing = "bottom";
+         Position = "98 7";
+         Extent = "72 72";
+         MinExtent = "8 2";
+         canSave = "1";
+         Visible = "1";
+         hovertime = "1000";
+         bitmap = "~/data/images/ui/mk1_ui/item_pane.png";
+         wrap = "0";
+      };
+      new GuiMLTextCtrl(item1_text) {
+         canSaveDynamicFields = "0";
+         isContainer = "0";
+         Profile = "GuiMLTextProfile";
+         HorizSizing = "right";
+         VertSizing = "bottom";
+         Position = "7 79";
+         Extent = "64 14";
+         MinExtent = "8 2";
+         canSave = "1";
+         Visible = "1";
+         hovertime = "1000";
+         lineSpacing = "2";
+         allowColorChars = "0";
+         maxChars = "-1";
+      };
+      new GuiMLTextCtrl(item2_text) {
+         canSaveDynamicFields = "0";
+         isContainer = "0";
+         Profile = "GuiMLTextProfile";
+         HorizSizing = "right";
+         VertSizing = "bottom";
+         Position = "101 79";
+         Extent = "64 14";
+         MinExtent = "8 2";
+         canSave = "1";
+         Visible = "1";
+         hovertime = "1000";
+         lineSpacing = "2";
+         allowColorChars = "0";
+         maxChars = "-1";
+      };
+      new GuiMLTextCtrl(item3_text) {
+         canSaveDynamicFields = "0";
+         isContainer = "0";
+         Profile = "GuiMLTextProfile";
+         HorizSizing = "right";
+         VertSizing = "bottom";
+         Position = "188 78";
+         Extent = "64 14";
+         MinExtent = "8 2";
+         canSave = "1";
+         Visible = "1";
+         hovertime = "1000";
+         lineSpacing = "2";
+         allowColorChars = "0";
+         maxChars = "-1";
       };
    };
 };
