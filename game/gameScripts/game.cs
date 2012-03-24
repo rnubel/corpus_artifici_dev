@@ -10,8 +10,8 @@
 //---------------------------------------------------------------------------------------------
 function startGame(%level)
 {
-   Canvas.setContent(defaultGUI);
-   Canvas.pushDialog(masterGUI);
+   Canvas.setContent(masterGUI);
+ //  Canvas.pushDialog(masterGUI);
    Canvas.setCursor(DefaultCursor);
    
    new ActionMap(moveMap);   
@@ -23,8 +23,8 @@ function startGame(%level)
    
    sceneWindow2D.loadLevel(%level);
 
-   healthbar_top_mask.setExtent(50,50);
-   staminabar_top_mask.setExtent(75,75);
+ //  healthbar_top_mask.setExtent(50,50);
+ //  staminabar_top_mask.setExtent(75,75);
    
 }
 

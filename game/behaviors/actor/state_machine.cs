@@ -28,9 +28,12 @@ function StateMachineBehavior::onBehaviorAdd(%this)
 	
 	%this.addEntryCallback("walking", 	"%this.startedWalking();");
 	%this.addEntryCallback("ready", 	"%this.stoppedMoving();");
-	%this.addEntryCallback("turning", 	"%this.startedTurning();");
+	%this.addEntryCallback("turning", 	"%this.startedTurning();");	
 	
-	%this.addEventCallback("doneTurning",	"%this.doneTurning();");
+	%this.addPreEventCallback("doneTurning",	"%this.doneTurning();");
+	
+	%this.addPostEventCallback("startBlocking",	"%this.delayEvent(\"doneStartingToBlock\",500,\"\");");
+	%this.addPostEventCallback("stopBlocking",	"%this.delayEvent(\"doneStoppingBlocking\",500,\"\");");
 }
 
 function StateMachineBehavior::onUpdate(%this)
@@ -46,9 +49,14 @@ function StateMachineBehavior::addEntryCallback(%this, %stateName, %eval)
 	%this.entryCallbacks[%stateName @ "_stoppingblocking"]	= %eval;	
 }
 
-function StateMachineBehavior::addEventCallback(%this, %eventName, %eval)
+function StateMachineBehavior::addPreEventCallback(%this, %eventName, %eval)
 {
-	%this.eventCallbacks[%eventName] = %eval;	
+	%this.preEventCallbacks[%eventName] = %eval;	
+}
+
+function StateMachineBehavior::addPostEventCallback(%this, %eventName, %eval)
+{
+	%this.postEventCallbacks[%eventName] = %eval;	
 }
 
 function StateMachineBehavior::addState(%this, %stateName, %attributes)
@@ -57,7 +65,7 @@ function StateMachineBehavior::addState(%this, %stateName, %attributes)
 	%blockable = ( strstr(%attributes, "blockable") >= 0 );
 		
 	if (%blockable) {
-		%this.realStateTransitions[%stateName @ "_notblocking","startBlocking"] 			= %stateName @ "_startingblocking";
+		%this.realStateTransitions[%stateName @ "_notblocking","startBlocking"] 			= %stateName @ "_startingblocking";		
 		%this.realStateTransitions[%stateName @ "_startingblocking","doneStartingToBlock"] 	= %stateName @ "_blocking";
 		%this.realStateTransitions[%stateName @ "_blocking","stopBlocking"]	 				= %stateName @ "_stoppingblocking";
 		%this.realStateTransitions[%stateName @ "_stoppingblocking","doneStoppingBlocking"]	= %stateName @ "_notblocking";		
@@ -66,7 +74,7 @@ function StateMachineBehavior::addState(%this, %stateName, %attributes)
 
 function StateMachineBehavior::stateIsBlockable(%this, %baseStateName) 
 {
-	return strstr(%this.baseStateAttributes[%baseStateName], "blockable");
+	return strstr(%this.baseStateAttributes[%baseStateName], "blockable") >= 0;
 }
 
 function StateMachineBehavior::addTransition(%this, %baseStateFrom, %event, %baseStateTo)
@@ -84,7 +92,7 @@ function StateMachineBehavior::reactToEvent(%this, %event)
 	echo("reacting to event " @ %event @ " in state " @ %this.state @ ": " @ %toState);
 	
 	// Perform event callback.
-	eval(%this.eventCallbacks[%event]);
+	eval(%this.preEventCallbacks[%event]);
 	
 	if (%toState $= "") {
 		// Event ignored.
@@ -96,6 +104,7 @@ function StateMachineBehavior::reactToEvent(%this, %event)
 		%this.state = %toState;
 		
 		// Call any callbacks.
+		eval(%this.postEventCallbacks[%event]);
 		eval(%this.entryCallbacks[%this.state]);
 		
 		return true;
@@ -159,20 +168,45 @@ function StateMachineBehavior::startedWalking(%this) {
 		%this.owner.setLinearVelocityX(-10);
 	} else {
 		%this.owner.setLinearVelocityX(10);
-	}
-	%this.owner.playAnimation(basicWalk);
+	}		
+	
+	%this.updateAnimation();
 }
 
 function StateMachineBehavior::stoppedMoving(%this) {
 	%this.owner.setLinearVelocityX(0);
-	%this.owner.playAnimation(basicIdle);
+	
+	%this.updateAnimation();
+}
+
+function StateMachineBehavior::updateAnimation(%this) {
+	if (%this.isWalking()) {
+		if (%this.isBlocking()) {
+			%this.owner.playAnimation(basicBlockWalk);
+		} else {
+			%this.owner.playAnimation(basicWalk);
+		}
+	else {
+		if (%this.isBlocking()) {
+			%this.owner.playAnimation(basicBlockIdle);
+		} else {
+			%this.owner.playAnimation(basicIdle);
+		}
+	}
 }
 
 function StateMachineBehavior::startedTurning(%this) {
-	
+	%this.updateAnimation();
 }
 
 function StateMachineBehavior::doneTurning(%this) {
 	%this.owner.setFlipX(!%this.owner.getFlipX());
 }
 
+function StateMachineBehavior::isBlocking(%this) {
+	return (strstr(%this.state, "_blocking") > 0);
+}
+
+function StateMachineBehavior::isWalking(%this) {
+	return (strstr(%this.state, "walking") == 0);
+}

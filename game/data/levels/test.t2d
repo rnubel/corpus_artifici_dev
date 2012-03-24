@@ -37,20 +37,12 @@
       cameraPosition = "0 0";
       cameraSize = "100 75";
 
-   new t2dTileLayer() {
-      LayerFile = "~/data/tilemaps/test_fg.lyr";
-      canSaveDynamicFields = "1";
-      Position = "19.182 27.471";
-      size = "478.364 315.057";
-      CollisionActiveReceive = "1";
-      CollisionMaxIterations = "1";
-         mountID = "2";
-   };
    new t2dAnimatedSprite(dummyObject) {
-      animationName = "basicWalk";
+      animationName = "basicIdle";
       config = "BaseActorConfig";
       Position = "-15.521 -8.073";
       size = "8.000 8.000";
+         mountID = "2";
       _behavior0 = "StateMachineBehavior";
       _behavior1 = "PlayerInputBehavior";
       _behavior2 = "CameraFollowsBehavior";
@@ -63,6 +55,15 @@
       Position = "1.341 -1.410";
       size = "122.681 82.821";
       Layer = "31";
+         mountID = "3";
+   };
+   new t2dTileLayer() {
+      LayerFile = "~/data/tilemaps/test_fg.lyr";
+      canSaveDynamicFields = "1";
+      Position = "19.182 27.471";
+      size = "478.364 315.057";
+      CollisionActiveReceive = "1";
+      CollisionMaxIterations = "1";
          mountID = "4";
    };
 };

@@ -112,4 +112,44 @@ $managedDatablockSet = new SimSet() {
       allowUnload = "0";
       force16Bit = "0";
    };
+   new t2dImageMapDatablock(platformer_sprites_pixelized21ImageMap) {
+      imageName = "~/data/images/platformer_sprites_pixelized21.png";
+      imageMode = "CELL";
+      frameCount = "-1";
+      filterMode = "SMOOTH";
+      filterPad = "1";
+      preferPerf = "1";
+      cellRowOrder = "1";
+      cellOffsetX = "0";
+      cellOffsetY = "0";
+      cellStrideX = "0";
+      cellStrideY = "0";
+      cellCountX = "8";
+      cellCountY = "9";
+      cellWidth = "64";
+      cellHeight = "64";
+      preload = "1";
+      allowUnload = "0";
+      force16Bit = "0";
+   };
+   new t2dAnimationDatablock(basicBlockIdle) {
+      imageMap = "platformer_sprites_pixelized21ImageMap";
+      animationFrames = "0 1 2 3";
+      animationTime = "0.666667";
+      animationCycle = "1";
+      randomStart = "0";
+      startFrame = "0";
+      animationPingPong = "0";
+      animationReverse = "0";
+   };
+   new t2dAnimationDatablock(basicBlockWalk) {
+      imageMap = "platformer_sprites_pixelized21ImageMap";
+      animationFrames = "32 33 34 35 36 37 38 39";
+      animationTime = "0.666667";
+      animationCycle = "1";
+      randomStart = "0";
+      startFrame = "0";
+      animationPingPong = "0";
+      animationReverse = "0";
+   };
 };
