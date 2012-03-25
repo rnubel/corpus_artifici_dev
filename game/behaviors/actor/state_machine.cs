@@ -20,15 +20,19 @@ function StateMachineBehavior::onBehaviorAdd(%this)
 	%this.addState("turning", "blockable");
 	%this.addState("walking", "blockable");	
 	%this.addState("running", "");
+	%this.addState("attacking", "");
 	
 	%this.addTransition("ready", 		"startMoving",		"walking");
 	%this.addTransition("walking", 		"stopMoving",		"ready");
 	%this.addTransition("ready",		"startTurning",		"turning");
+	%this.addTransition("ready",		"startAttacking",	"attacking");
+	%this.addTransition("attacking",	"stopAttacking",	"ready");
 	%this.addTransition("turning",		"doneTurning",		"ready");
 	
 	%this.addEntryCallback("walking", 	"%this.startedWalking();");
 	%this.addEntryCallback("ready", 	"%this.stoppedMoving();");
 	%this.addEntryCallback("turning", 	"%this.startedTurning();");	
+	%this.addEntryCallback("attacking", "%this.startedAttacking();");	
 	
 	%this.addPreEventCallback("doneTurning",	"%this.doneTurning();");
 	
@@ -83,6 +87,8 @@ function StateMachineBehavior::addTransition(%this, %baseStateFrom, %event, %bas
 	
 	if (%this.stateIsBlockable(%baseStateFrom) && %this.stateIsBlockable(%baseStateTo)) {
 		%this.realStateTransitions[%baseStateFrom @ "_blocking", %event] = %baseStateTo @ "_blocking";
+		%this.realStateTransitions[%baseStateFrom @ "_startingblocking", %event] = %baseStateTo @ "_startingblocking";
+		%this.realStateTransitions[%baseStateFrom @ "_stoppingblocking", %event] = %baseStateTo @ "_stoppingblocking";
 	}
 }
 
@@ -100,7 +106,10 @@ function StateMachineBehavior::reactToEvent(%this, %event)
 	} else {
 		echo(%this.state @ " -[" @ %event @ "]-> " @ %toState);
 		
-		%this.delayedEventKey += 1; // Invalidate any delayed events.
+		if (strstr(%event, "block") > -1) {
+			%this.delayedEventKey += 1; // Invalidate any delayed events.
+		}
+		
 		%this.state = %toState;
 		
 		// Call any callbacks.
@@ -114,7 +123,7 @@ function StateMachineBehavior::reactToEvent(%this, %event)
 // Mechanism to delay event transitions assuming our state does not change pre-emptively.
 function StateMachineBehavior::delayEvent(%this, %event, %time, %eval) 
 {
-	%this.delayedEventKey += 1;
+	//%this.delayedEventKey += 1;
 	%this.schedule(%time, "executeDelayedEvent", %event, %this.delayedEventKey, %eval);
 }
 
@@ -125,7 +134,7 @@ function StateMachineBehavior::executeDelayedEvent(%this, %event, %key, %eval)
 		%this.reactToEvent(%event);
 		eval(%eval);
 	} else {
-		echo("Delayed event discarded due to preemptive transition.");
+		echo("Delayed event " @ %event @ " discarded due to preemptive transition.");
 	}
 }
 
@@ -187,6 +196,9 @@ function StateMachineBehavior::updateAnimation(%this) {
 			%this.owner.playAnimation(basicWalk);
 		}
 	}
+	else if (%this.isAttacking()) {
+		%this.owner.playAnimation(basicAttack);
+	}
 	else {
 		if (%this.isBlocking()) {
 			%this.owner.playAnimation(basicBlockIdle);
@@ -194,9 +206,15 @@ function StateMachineBehavior::updateAnimation(%this) {
 			%this.owner.playAnimation(basicIdle);
 		}
 	}
+	
+	
 }
 
 function StateMachineBehavior::startedTurning(%this) {
+	%this.updateAnimation();
+}
+
+function StateMachineBehavior::startedAttacking(%this) {
 	%this.updateAnimation();
 }
 
@@ -210,4 +228,8 @@ function StateMachineBehavior::isBlocking(%this) {
 
 function StateMachineBehavior::isWalking(%this) {
 	return (strstr(%this.state, "walking") == 0);
+}
+
+function StateMachineBehavior::isAttacking(%this) {
+	return (strstr(%this.state, "attacking") == 0);
 }

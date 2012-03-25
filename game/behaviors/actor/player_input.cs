@@ -83,3 +83,8 @@ function PlayerInputBehavior::getStateMachine(%this)
 {
 	return %this.owner.getBehavior("StateMachineBehavior");
 }
+
+function PlayerInputBehavior::hitAttack(%this)
+{
+  %this.owner.getBehavior("CanAttackBehavior").attack();
+}
