@@ -12,6 +12,7 @@ function PlayerInputBehavior::onBehaviorAdd(%this)
 {	
 	moveMap.bindObj(getWord("keyboard right", 0), 	getWord("keyboard right", 1), 	"setRight", %this);
 	moveMap.bindObj(getWord("keyboard left", 0), 	getWord("keyboard left", 1), 	"setLeft", %this);
+	moveMap.bindObj(getWord("keyboard up", 0), 		getWord("keyboard up", 1), 				"hitJump", %this);
 	//moveMap.bindObj(getWord("mouse0 button1", 0), 	getWord("mouse0 button1", 1), 	"setBlock", %this);
 	moveMap.bindObj(getWord("keyboard space", 0), 	getWord("keyboard space", 1), 	"hitAttack", %this);
 	
@@ -87,4 +88,10 @@ function PlayerInputBehavior::getStateMachine(%this)
 function PlayerInputBehavior::hitAttack(%this)
 {
   %this.owner.getBehavior("CanAttackBehavior").attack();
+}
+
+
+function PlayerInputBehavior::hitJump(%this)
+{
+  %this.getStateMachine().reactToEvent("startJumping");
 }

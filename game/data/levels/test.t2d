@@ -40,28 +40,31 @@
    new t2dAnimatedSprite(dummyObject) {
       animationName = "basicIdle";
       config = "BaseActorConfig";
-      Position = "-15.521 -8.073";
+      useMouseEvents = "1";
+      Position = "-16.521 -8.073";
       size = "8.000 8.000";
+      CollisionCallback = "1";
          mountID = "2";
       _behavior0 = "StateMachineBehavior";
       _behavior1 = "PlayerInputBehavior";
       _behavior2 = "CameraFollowsBehavior";
+      _behavior3 = "CanAttackBehavior";
    };
    new t2dStaticSprite() {
       imageMap = "bg_blank_skyImageMap";
       frame = "0";
       sourceRect = "0 0 0 0";
       canSaveDynamicFields = "1";
-      Position = "45.000 14.263";
-      size = "480.000 298.526";
+      Position = "2065.000 2112.821";
+      size = "5000.000 5000.000";
       Layer = "31";
          mountID = "3";
    };
    new t2dTileLayer() {
       LayerFile = "~/data/tilemaps/test_fg.lyr";
       canSaveDynamicFields = "1";
-      Position = "19.182 27.471";
-      size = "478.364 315.057";
+      Position = "12280.000 12369.999";
+      size = "25000.000 25000.000";
       CollisionActiveReceive = "1";
       CollisionMaxIterations = "1";
          mountID = "4";

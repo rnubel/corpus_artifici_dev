@@ -152,4 +152,14 @@ $managedDatablockSet = new SimSet() {
       animationPingPong = "0";
       animationReverse = "0";
    };
+   new t2dAnimationDatablock(basicAttack) {
+      imageMap = "platformer_sprites_pixelizedImageMap";
+      animationFrames = "26 27 28";
+      animationTime = "0.75";
+      animationCycle = "0";
+      randomStart = "0";
+      startFrame = "0";
+      animationPingPong = "0";
+      animationReverse = "0";
+   };
 };

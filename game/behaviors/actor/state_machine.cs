@@ -21,6 +21,7 @@ function StateMachineBehavior::onBehaviorAdd(%this)
 	%this.addState("walking", "blockable");	
 	%this.addState("running", "");
 	%this.addState("attacking", "");
+	%this.addState("jumping", "");
 	
 	%this.addTransition("ready", 		"startMoving",		"walking");
 	%this.addTransition("walking", 		"stopMoving",		"ready");
@@ -28,11 +29,15 @@ function StateMachineBehavior::onBehaviorAdd(%this)
 	%this.addTransition("ready",		"startAttacking",	"attacking");
 	%this.addTransition("attacking",	"stopAttacking",	"ready");
 	%this.addTransition("turning",		"doneTurning",		"ready");
+	%this.addTransition("ready",		"startJumping",		"jumping");
+	%this.addTransition("walking",		"startJumping",		"jumping");
+	%this.addTransition("jumping",		"hitGround",		"ready");
 	
 	%this.addEntryCallback("walking", 	"%this.startedWalking();");
 	%this.addEntryCallback("ready", 	"%this.stoppedMoving();");
 	%this.addEntryCallback("turning", 	"%this.startedTurning();");	
-	%this.addEntryCallback("attacking", "%this.startedAttacking();");	
+	%this.addEntryCallback("attacking", "%this.startedAttacking();");
+	%this.addEntryCallback("jumping",	"%this.startedJumping();");
 	
 	%this.addPreEventCallback("doneTurning",	"%this.doneTurning();");
 	
@@ -171,6 +176,10 @@ function StateMachineBehavior::stopBlocking(%this) {
 	%this.delayEvent("doneStoppingBlocking", 300);
 }
 
+function StateMachineBehavior::jump(%this) {
+	%this.reactToEvent("startJumping");
+}
+
 // **** CALLBACKS ****
 function StateMachineBehavior::startedWalking(%this) {
 	if (%this.direction $= "left") {
@@ -184,6 +193,12 @@ function StateMachineBehavior::startedWalking(%this) {
 
 function StateMachineBehavior::stoppedMoving(%this) {
 	%this.owner.setLinearVelocityX(0);
+	
+	%this.updateAnimation();
+}
+
+function StateMachineBehavior::startedJumping(%this) {
+	%this.owner.setLinearVelocityY(-15);
 	
 	%this.updateAnimation();
 }
@@ -232,4 +247,14 @@ function StateMachineBehavior::isWalking(%this) {
 
 function StateMachineBehavior::isAttacking(%this) {
 	return (strstr(%this.state, "attacking") == 0);
+}
+
+// FIXME: pull out
+function StateMachineBehavior::onCollision(%this, %dstObj, %srcRef, %dstRef, %time, %normal, %contacts, %points)
+{   
+	 if (getWord(%normal, 1) == -1) {
+		%this.reactToEvent("hitGround");
+	 } else {
+		echo(%normal @ " is no good");
+	 }
 }
